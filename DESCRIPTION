@@ -1,0 +1,19 @@
+Package: lubriseas
+Type: Package
+Title: Easy seasonal adjustment of tidy data
+Version: 0.1.0
+Author: Angus Moore
+Maintainer: Angus Moore <yourself@somewhere.net>
+Description: lubriseas will automatically seasonally adjust every column in your tibble while respecting groups.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+  lubridate,
+  tibble,
+  dplyr,
+  seasonal
+Suggests:
+  testthat,
+  magrittr
+RoxygenNote: 6.0.1
