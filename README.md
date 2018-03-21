@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/angusmoore/lubriseas/badge.svg?branch=master)](https://coveralls.io/github/angusmoore/lubriseas?branch=master)
 
 # lubriseas
-`lubriseas` is an `R` package that makes it easy to seasonally adjust tidy data using X13. It is a thin wrapper around the `seasonal` library (see [github](https://github.com/christophsax/seasonal) [cran](https://cran.r-project.org/package=seasonal)).
+`lubriseas` is an `R` package that makes it easy to seasonally adjust tidy data using X13. It is a thin wrapper around the `seasonal` library (see [github](https://github.com/christophsax/seasonal); [cran](https://cran.r-project.org/package=seasonal)).
 
 The benefit of `lubriseas` is that it accepts `tibbles` or `data.frames` with date columns (instead of `ts`) and respects grouping variables. This means you can easily seasonally adjust a large number of series that are in long form.
 
