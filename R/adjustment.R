@@ -31,7 +31,7 @@ seas_adjust_group <- function(original, date_col, frequency, group_vars, use_ori
         }
       } else {
         tryCatch({
-          adjusted <- tibble::as_tibble(seasonal::seas(tsversion), ...)
+          adjusted <- tibble::as_tibble(seasonal::seas(tsversion, ...))
           adjusted <- adjusted[, c("date", "final")]
           adjusted <- dplyr::rename_(adjusted, .dots = stats::setNames(c("date", "final"), c(date_col, var)))
           SA <- dplyr::left_join(SA, adjusted, by = date_col)
