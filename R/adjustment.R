@@ -30,10 +30,21 @@ seas_adjust_group <- function(original, date_col, frequency, group_vars, use_ori
           SA[[var]] <- NA
         }
       } else {
-        adjusted <- tibble::as_tibble(seasonal::seas(tsversion), ...)
-        adjusted <- adjusted[, c("date", "final")]
-        adjusted <- dplyr::rename_(adjusted, .dots = stats::setNames(c("date", "final"), c(date_col, var)))
-        SA <- dplyr::left_join(SA, adjusted, by = date_col)
+        tryCatch({
+          adjusted <- tibble::as_tibble(seasonal::seas(tsversion), ...)
+          adjusted <- adjusted[, c("date", "final")]
+          adjusted <- dplyr::rename_(adjusted, .dots = stats::setNames(c("date", "final"), c(date_col, var)))
+          SA <- dplyr::left_join(SA, adjusted, by = date_col)
+        },
+        error=function(cond) {
+          if (use_original) {
+            warning("Time series has missing observations. Cannot seasonally adjust. Keeping original data.")
+            SA <- dplyr::left_join(SA, original[, c(date_col, var)], by = date_col)
+          } else {
+            warning("Time series has missing observations. Cannot seasonally adjust. Replacing series with NAs.")
+            SA[[var]] <- NA
+          }
+        })
       }
     }
   }
