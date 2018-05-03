@@ -1,4 +1,4 @@
 library(testthat)
-library(lubriseas)
+library(seasthedata)
 
-test_check("lubriseas")
+test_check("seasthedata")

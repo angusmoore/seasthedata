@@ -1,13 +1,13 @@
 #' Easily seasonally adjust a tibble or data.frame of long data
 #'
-#' lubriseas will automatically seasonally adjust every column in your tibble
+#' seasthedata will automatically seasonally adjust every column in your tibble
 #' while respecting groups. Your data must contain exactly one column of dates.
 #'
-#' lubriseas is a wrapper around the seasonal library (https://github.com/christophsax/seasonal)
+#' seasthedata is a wrapper around the seasonal library (https://github.com/christophsax/seasonal)
 #'
 #' @param original Your data, in original terms, to be seasonally adjusted.
 #' @param frequency (Optional) The frequency of your data. Accepted options are
-#' "quarter", "month", "day". If omitted, lubriseas will guess the frequency.
+#' "quarter", "month", "day". If omitted, seasthedata will guess the frequency.
 #' @param use_original (default: FALSE) If the series cannot be seasonally
 #' adjusted, should the returned data have NAs for the relevant series (default)
 #' or the original data.
@@ -20,15 +20,15 @@
 #' ungrouped_data <- tibble(dates = seq.Date(from = as.Date("1949-01-01"),
 #'                          by = "month", length.out = 144),
 #'                          y = as.vector(AirPassengers))
-#' lubriseas(ungrouped_data)
+#' seasthedata(ungrouped_data)
 #'
 #' grouped_data <- bind_rows(mutate(ungrouped_data, group = "A"),
 #'                           mutate(ungrouped_data, group = "B"))
 #' grouped_data <- group_by(grouped_data, group)
-#' lubriseas(grouped_data)
+#' seasthedata(grouped_data)
 #'
 #' @export
-lubriseas <- function(original, frequency = NULL, use_original = FALSE, ...) {
+seasthedata <- function(original, frequency = NULL, use_original = FALSE, ...) {
   # Sanity check input
   if (!tibble::is_tibble(original) && !is.data.frame(original)) {
     stop("You data are not a tibble or data frame.")
