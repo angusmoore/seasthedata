@@ -1,3 +1,19 @@
+leading_nas <- function(data) {
+  i <- 0
+  while (is.na(data[i+1])) {
+    i <- i + 1
+  }
+  return(i)
+}
+
+trailing_nas <- function(data) {
+  i <- 0
+  while (is.na(data[length(data)-i])) {
+    i <- i + 1
+  }
+  return(i)
+}
+
 get_date_col <- function(data) {
   date_col <- NULL
   for (col in colnames(data)) {

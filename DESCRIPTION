@@ -12,7 +12,8 @@ Imports:
   lubridate,
   tibble,
   dplyr,
-  seasonal
+  seasonal,
+  zoo
 Suggests:
   testthat,
   magrittr
