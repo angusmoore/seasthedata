@@ -59,3 +59,10 @@ chopped <- ungrouped[10:100, ]
 unbalanced <- bind_rows(mutate(ungrouped, group = "full"), mutate(chopped, group = "chop")) %>%
   group_by(group)
 expect_error(lubriseas(unbalanced), NA)
+
+# leading (or trailing) NAs should be trimmed and ignored
+foo <- data.frame(date = seq.Date(from=as.Date("2000-01-01"), by= "quarter", length.out = 40), x=rnorm(40))
+foo$x[1:2] <- NA
+expect_error(lubriseas(foo), NA)
+foo$x[39:40] <- NA
+expect_error(lubriseas(foo), NA)
