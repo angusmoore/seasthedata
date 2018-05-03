@@ -20,7 +20,7 @@ seas_adjust_group <- function(original, date_col, frequency, group_vars, use_ori
 
   for (var in colnames(original)) {
     if (!(var %in% excl_vars)) {
-      tsversion <- stats::ts(original[[var]], start = start, frequency = frequency)
+      tsversion <- zoo::na.trim(stats::ts(original[[var]], start = start, frequency = frequency))
       if (any(is.na(tsversion))) {
         if (use_original) {
           warning("Time series has missing observations. Cannot seasonally adjust. Keeping original data.")
