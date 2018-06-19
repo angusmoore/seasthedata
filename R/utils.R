@@ -14,6 +14,29 @@ trailing_nas <- function(data) {
   return(i)
 }
 
+get_start_date <- function(date_col, frequency) {
+  start <- min(date_col)
+  if (frequency == "quarter") {
+    return(c(lubridate::year(start), lubridate::quarter(start)))
+  } else if (frequency == "month") {
+    return(c(lubridate::year(start), lubridate::month(start)))
+  } else if (frequency == "day") {
+    return(c(lubridate::year(start), lubridate::yday(start)))
+  } else {
+    stop(paste0("Don't know how to handle frequency ", frequency))
+  }
+}
+
+frequency_number <- function(frequency) {
+  if (frequency == "quarter") {
+    return(4)
+  } else if (frequency == "month") {
+    return(12)
+  } else if (frequency == "day") {
+    return(365)
+  }
+}
+
 get_date_col <- function(data) {
   date_col <- NULL
   for (col in colnames(data)) {
