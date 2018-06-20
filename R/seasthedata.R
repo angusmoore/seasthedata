@@ -40,7 +40,7 @@ seasthedata <- function(original, frequency = NULL, use_original = FALSE, ...) {
     message(paste0("Frequency not supplied, have determined it to be ", frequency))
   }
 
-  if (frequency != "quarter" && frequency != "month" && frequency != "day") {
+  if (frequency != "quarter" && frequency != "month") {
     stop(paste0("Do not know how to seasonally adjust data with frequency ", frequency))
   }
 
