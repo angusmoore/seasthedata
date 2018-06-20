@@ -20,8 +20,6 @@ get_start_date <- function(date_col, frequency) {
     return(c(lubridate::year(start), lubridate::quarter(start)))
   } else if (frequency == "month") {
     return(c(lubridate::year(start), lubridate::month(start)))
-  } else if (frequency == "day") {
-    return(c(lubridate::year(start), lubridate::yday(start)))
   } else {
     stop(paste0("Don't know how to handle frequency ", frequency))
   }
@@ -32,8 +30,6 @@ frequency_number <- function(frequency) {
     return(4)
   } else if (frequency == "month") {
     return(12)
-  } else if (frequency == "day") {
-    return(365)
   }
 }
 
