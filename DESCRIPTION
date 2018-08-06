@@ -3,7 +3,7 @@ Type: Package
 Title: Easy seasonal adjustment of tidy data
 Version: 0.1.0
 Author: Angus Moore
-Maintainer: Angus Moore <yourself@somewhere.net>
+Maintainer: Angus Moore <18376371+angusmoore@users.noreply.github.com>
 Description: seasthedata will automatically seasonally adjust every column in your tibble while respecting groups.
 License: MIT + file LICENSE
 Encoding: UTF-8

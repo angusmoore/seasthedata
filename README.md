@@ -11,7 +11,7 @@ The benefit of `seasthedata` is that it accepts `tibbles` or `data.frames` with 
 Install the package using the R `devtools` package:
   ```
 library(devtools)
-install_github("angusmoore/seasthedata")
+install_github("angusmoore/seasthedata", ref= "stable")
 ```
 
 You may need to first install the `devtools` package if you don't already have it (`install.packages("devtools")`).
