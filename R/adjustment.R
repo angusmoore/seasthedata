@@ -1,34 +1,38 @@
 adjust_single_series <- function(SA, original, var, date_col, start, frequency, use_original, ...) {
-  tsversion <- stats::ts(original[[var]], start = start, frequency = frequency)
+  if (all(is.na(original[[var]]))) {
+    SA[[var]] <- NA
+  } else {
+    tsversion <- stats::ts(original[[var]], start = start, frequency = frequency)
 
-  omit_leading <- leading_nas(tsversion)
-  omit_trailing <- trailing_nas(tsversion)
+    omit_leading <- leading_nas(tsversion)
+    omit_trailing <- trailing_nas(tsversion)
 
-  tryCatch({
-    adjusted <- seasonal::seas(tsversion, ...)
-    adjusted <- tibble::as_tibble(adjusted$data)
+    tryCatch({
+      adjusted <- seasonal::seas(tsversion, ...)
+      adjusted <- tibble::as_tibble(adjusted$data)
 
-    # Put the original dates in. Drop any that correspond to leading or trailing NAs
-    original_dates <- original[[date_col]]
-    original_dates <- original_dates[(1+omit_leading):(length(original_dates)-omit_trailing)]
-    adjusted$date <- original_dates
+      # Put the original dates in. Drop any that correspond to leading or trailing NAs
+      original_dates <- original[[date_col]]
+      original_dates <- original_dates[(1+omit_leading):(length(original_dates)-omit_trailing)]
+      adjusted$date <- original_dates
 
-    # Get only the needed series (and rename them)
-    adjusted <- adjusted[, c("date", "final")]
-    adjusted <- dplyr::rename_(adjusted, .dots = stats::setNames(c("date", "final"), c(date_col, var)))
+      # Get only the needed series (and rename them)
+      adjusted <- adjusted[, c("date", "final")]
+      adjusted <- dplyr::rename_(adjusted, .dots = stats::setNames(c("date", "final"), c(date_col, var)))
 
-    # Merge in
-    SA <- dplyr::left_join(SA, adjusted, by = date_col)
-  },
-  error=function(cond) {
-    if (use_original) {
-      warning(paste0("Error seasonally adjusting series (keeping original data): ", cond))
-      SA <<- dplyr::left_join(SA, original[, c(date_col, var)], by = date_col)
-    } else {
-      warning(paste0("Error seasonally adjusting series (replacing series with NAs): ", cond))
-      SA[[var]] <<- NA
-    }
-  })
+      # Merge in
+      SA <- dplyr::left_join(SA, adjusted, by = date_col)
+    },
+    error=function(cond) {
+      if (use_original) {
+        warning(paste0("Error seasonally adjusting series (keeping original data): ", cond))
+        SA <<- dplyr::left_join(SA, original[, c(date_col, var)], by = date_col)
+      } else {
+        warning(paste0("Error seasonally adjusting series (replacing series with NAs): ", cond))
+        SA[[var]] <<- NA
+      }
+    })
+  }
 
   return(SA)
 }
