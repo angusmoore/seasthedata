@@ -66,3 +66,11 @@ foo$x[1:2] <- NA
 expect_error(seasthedata(foo), NA)
 foo$x[39:40] <- NA
 expect_error(seasthedata(foo), NA)
+
+# If series is all NA (#13)
+foo <- data.frame(x=seq.Date(from = as.Date("2000-01-01"),by = "month", length.out=100),y=NA)
+expect_error(
+  seasthedata(foo),
+  NA
+)
+
