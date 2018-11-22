@@ -22,7 +22,7 @@ Installation failed: Timeout was reached: Connection timed out after 10000 milli
 ```
 If you get this message, try setting your proxy server with the following command, and then running the install again:
 ```
-httr::set_config(httr::use_proxy(curl::ie_get_proxy_for_url("http://www.google.com")))
+Sys.setenv(https_proxy = curl::ie_get_proxy_for_url("https://www.google.com"))
 ```
 
 ## Usage
