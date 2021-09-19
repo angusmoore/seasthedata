@@ -1,5 +1,5 @@
-[![Travis-CI Build Status](https://travis-ci.org/angusmoore/seasthedata.svg?branch=master)](https://travis-ci.org/angusmoore/seasthedata)
-[![Coverage Status](https://coveralls.io/repos/github/angusmoore/seasthedata/badge.svg?branch=master)](https://coveralls.io/github/angusmoore/seasthedata?branch=master)
+[![CI](https://github.com/angusmoore/seasthedata/actions/workflows/CI.yml/badge.svg)](https://github.com/angusmoore/seasthedata/actions/workflows/CI.yml)
+[![codecov](https://codecov.io/gh/angusmoore/seasthedata/branch/master/graph/badge.svg?token=KGtvZcW48b)](https://codecov.io/gh/angusmoore/seasthedata)
 
 # seasthedata
 `seasthedata` is an `R` package that makes it easy to seasonally adjust tidy data using X13. It is a thin wrapper around the `seasonal` library (see [github](https://github.com/christophsax/seasonal); [cran](https://cran.r-project.org/package=seasonal)).
