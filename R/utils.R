@@ -1,6 +1,6 @@
 leading_nas <- function(data) {
   i <- 0
-  while (is.na(data[i+1])) {
+  while (is.na(data[i + 1])) {
     i <- i + 1
   }
   return(i)
@@ -8,7 +8,7 @@ leading_nas <- function(data) {
 
 trailing_nas <- function(data) {
   i <- 0
-  while (is.na(data[length(data)-i])) {
+  while (is.na(data[length(data) - i])) {
     i <- i + 1
   }
   return(i)
@@ -73,8 +73,8 @@ regularise <- function(data, date_col, frequency, group_vars) {
   end <- max(data[[date_col]])
   reg_seq <- seq.Date(from = start, to = end, by = frequency)
   staging_tibble <- tibble::tibble(full_dates = reg_seq)
-  joinNames <- stats::setNames("full_dates", date_col)
-  widened <- dplyr::right_join(data, staging_tibble, by = joinNames)
+  join_names <- stats::setNames("full_dates", date_col)
+  widened <- dplyr::right_join(data, staging_tibble, by = join_names)
   widened <- dplyr::arrange(widened, .data[[date_col]])
 
   # And now ensure that any new vars get the correct values for each of the group variables

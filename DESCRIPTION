@@ -11,12 +11,12 @@ LazyData: true
 Imports:
     lubridate,
     tibble,
-    dplyr,
+    dplyr (>= 1.0.0),
     seasonal,
-    rlang,
-    zoo,
-    tidyselect
+    rlang
 Suggests:
   testthat,
+  lintr,
+  pkgdown,
   magrittr
 RoxygenNote: 7.1.1

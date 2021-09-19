@@ -7,7 +7,7 @@ test_that("Find date column", {
     date_seq <- seq.Date(from = as.Date("2017-01-01"), by = "month", length.out = 3)
 
     # Expect error for data without date column
-    no_date <- tibble(x = c(1,2,3), y = rnorm(3))
+    no_date <- tibble(x = c(1, 2, 3), y = rnorm(3))
     expect_error(get_date_col(no_date))
 
     # Expect error if two date columns
@@ -23,16 +23,16 @@ test_that("Find date column", {
 test_that("Find frequency of data", {
     # Set up fake data first
     yearly <- seq.Date(from = as.Date("2001-01-01"), by = "year", length.out = 10)
-    yearly_drop <- yearly[c(1:5,7:10)] # Correctly handle missing observations
+    yearly_drop <- yearly[c(1:5, 7:10)] # Correctly handle missing observations
 
     quarterly <- seq.Date(from = as.Date("2001-01-01"), by = "quarter", length.out = 10)
-    quarterly_drop <- quarterly[c(1:5,7:10)] # Correctly handle missing observations
+    quarterly_drop <- quarterly[c(1:5, 7:10)] # Correctly handle missing observations
 
     monthly <- seq.Date(from = as.Date("2001-01-01"), by = "month", length.out = 10)
-    monthly_drop <- monthly[c(1:5,7:10)] # Correctly handle missing observations
+    monthly_drop <- monthly[c(1:5, 7:10)] # Correctly handle missing observations
 
     daily <- seq.Date(from = as.Date("2001-01-01"), by = "day", length.out = 10)
-    daily_drop <- daily[c(1:5,7:10)] # Correctly handle missing observations
+    daily_drop <- daily[c(1:5, 7:10)] # Correctly handle missing observations
 
     expect_equal(find_frequency(yearly), "year")
     expect_equal(find_frequency(yearly_drop), "year")
@@ -48,7 +48,7 @@ test_that("Find frequency of data", {
 test_that("Regularise time series", {
     quarterly <- seq.Date(from = as.Date("2001-01-01"), by = "quarter", length.out = 10)
     non_missing <- tibble(dates = quarterly, y1 = rnorm(10), y2 = rnorm(10))
-    missing <- non_missing[c(1:5,7:10), ]
+    missing <- non_missing[c(1:5, 7:10), ]
 
     expect_equal(regularise(non_missing, "dates", frequency = "quarter", c()), non_missing) # should be no-op
 
