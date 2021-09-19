@@ -1,0 +1,10 @@
+destination: docs
+
+template:
+  params:
+    bootswatch: paper
+
+reference:
+- title: Seasonal adjustment of tidy data
+  contents:
+  - '`seasthedata`'

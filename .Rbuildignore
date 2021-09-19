@@ -4,3 +4,6 @@
 .push_gh_pages.sh
 README.md
 .github
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
