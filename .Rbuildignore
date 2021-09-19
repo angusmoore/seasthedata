@@ -3,3 +3,4 @@
 .travis.yml
 .push_gh_pages.sh
 README.md
+.github
