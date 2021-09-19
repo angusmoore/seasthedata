@@ -1,5 +1,8 @@
-[![CI](https://github.com/angusmoore/seasthedata/actions/workflows/CI.yml/badge.svg)](https://github.com/angusmoore/seasthedata/actions/workflows/CI.yml)
-[![codecov](https://codecov.io/gh/angusmoore/seasthedata/branch/master/graph/badge.svg?token=KGtvZcW48b)](https://codecov.io/gh/angusmoore/seasthedata)
+ <!-- badges: start -->
+ [![CI](https://github.com/angusmoore/seasthedata/actions/workflows/CI.yml/badge.svg)](https://github.com/angusmoore/seasthedata/actions/workflows/CI.yml)
+[![codecov](https://codecov.io/gh/angusmoore/seasthedata/branch/main/graph/badge.svg?token=KGtvZcW48b)](https://codecov.io/gh/angusmoore/seasthedata)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+<!-- badges: end -->
 
 # seasthedata
 `seasthedata` is an `R` package that makes it easy to seasonally adjust tidy data using X13. It is a thin wrapper around the `seasonal` library (see [github](https://github.com/christophsax/seasonal); [cran](https://cran.r-project.org/package=seasonal)).

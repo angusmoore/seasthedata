@@ -44,7 +44,7 @@ jobs:
 
   pkgdown:
     needs: R-CMD-check
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
