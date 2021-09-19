@@ -38,9 +38,6 @@ adjust_single_series <- function(SA, original, var, date_col, start, frequency, 
 }
 
 seas_adjust_group <- function(original, date_col, frequency, group_vars, use_original, ...) {
-  # Don't attempt to adjust these
-  excl_vars <- c(group_vars, date_col)
-
   # Regularise time series
   original <- regularise(original, date_col, frequency, group_vars)
 
@@ -49,12 +46,10 @@ seas_adjust_group <- function(original, date_col, frequency, group_vars, use_ori
 
   # Create a copy of only the non-adjusted vars.
   # We'll merge the adjusted data on column by column once we've adjusted it.
-  SA <- original[, excl_vars, drop = FALSE]
+  SA <- original[, date_col, drop = FALSE]
 
-  for (var in colnames(original)) {
-    if (!(var %in% excl_vars)) {
-      SA <- adjust_single_series(SA, original, var, date_col, start, frequency_number(frequency), use_original, ...)
-    }
+  for (var in setdiff(colnames(original), c(date_col, names(group_vars)))) {
+    SA <- adjust_single_series(SA, original, var, date_col, start, frequency_number(frequency), use_original, ...)
   }
-  return(SA)
+  return(dplyr::bind_cols(SA, group_vars))
 }

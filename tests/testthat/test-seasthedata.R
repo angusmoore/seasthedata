@@ -49,6 +49,7 @@ test_that("Missing data", {
   missing <- filter(ungrouped, dates != as.Date("1949-05-01"))
   missingshouldbe <- mutate(ungrouped, y = ifelse(dates == as.Date("1949-05-01"), NA, y))
   expect_equal(seasthedata(missing, use_original = TRUE), missingshouldbe)
+  expect_warning(seasthedata(missing, use_original = TRUE), "internal NAs")
   shouldbe <- tibble(dates = ungrouped$dates, y = NA)
   expect_equal(seasthedata(missing, use_original = FALSE), shouldbe)
 

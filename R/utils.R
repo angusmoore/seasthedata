@@ -64,6 +64,7 @@ find_frequency <- function(dates) {
   stop("Unable to determine frequency of data.")
 }
 
+#' @importFrom rlang .data
 regularise <- function(data, date_col, frequency, group_vars) {
   if (any(duplicated(data[[date_col]]))) {
     stop("You have duplicate dates within a group. Have you correctly grouped your data?")
@@ -74,10 +75,11 @@ regularise <- function(data, date_col, frequency, group_vars) {
   staging_tibble <- tibble::tibble(full_dates = reg_seq)
   joinNames <- stats::setNames("full_dates", date_col)
   widened <- dplyr::right_join(data, staging_tibble, by = joinNames)
+  widened <- dplyr::arrange(widened, .data[[date_col]])
+
   # And now ensure that any new vars get the correct values for each of the group variables
-  for (var in group_vars) {
-    val <- unique(data[[var]])
-    val <- val[!is.na(val)]
+  for (var in names(group_vars)) {
+    val <- group_vars[[var]]
     widened[[var]] <- val
   }
   return(widened)

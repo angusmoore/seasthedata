@@ -50,17 +50,17 @@ test_that("Regularise time series", {
     non_missing <- tibble(dates = quarterly, y1 = rnorm(10), y2 = rnorm(10))
     missing <- non_missing[c(1:5,7:10), ]
 
-    expect_equal(regularise(non_missing, frequency = "quarter"), non_missing) # should be no-op
+    expect_equal(regularise(non_missing, "dates", frequency = "quarter", c()), non_missing) # should be no-op
 
     shouldbe <- non_missing
     shouldbe[6, c("y1", "y2")] <- NA
-    expect_equal(regularise(missing, frequency = "quarter"), shouldbe)
+    expect_equal(regularise(missing, "dates", frequency = "quarter", c()), shouldbe)
 
     # Wrongly passing in ungrouped data, so that there are duplicate groups
     duplicate <- bind_rows(missing, non_missing)
-    expect_error(regularise(duplicate, frequency = "quarter"))
+    expect_error(regularise(duplicate, "dates", frequency = "quarter", c()))
 
     # Regularise grouped data (check that group variables are correctly applied to widened observations)
     grouped_missing <- mutate(missing, group = "A")
-    expect_false(any(is.na(regularise(grouped_missing, frequency = "quarter")$group)))
+    expect_false(any(is.na(regularise(grouped_missing, "dates", frequency = "quarter", c("group" = "A"))$group)))
 })

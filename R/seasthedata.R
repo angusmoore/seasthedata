@@ -45,10 +45,14 @@ seasthedata <- function(original, frequency = NULL, use_original = FALSE, ...) {
   }
 
   # We use dplyr::do so that we respect grouping variables
-  dplyr::do(original, seas_adjust_group(original = .,
-                                        date_col = date_col,
-                                        frequency = frequency,
-                                        group_vars = dplyr::group_vars(original),
-                                        use_original = use_original,
-                                        ...))
+  dplyr::bind_rows(dplyr::group_map(
+    .data = original,
+    .f = ~ seas_adjust_group(
+      original = .x,
+      date_col = date_col,
+      frequency = frequency,
+      group_vars = .y,
+      use_original = use_original),
+    ...,
+    .keep = TRUE))
 }
