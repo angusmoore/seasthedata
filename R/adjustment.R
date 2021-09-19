@@ -1,4 +1,6 @@
-adjust_single_series <- function(SA, original, var, date_col, start, frequency, use_original, ...) {
+#' @importFrom rlang :=
+#' @importFrom rlang .data
+adjust_single_series <- function(seas_adjusted, original, var, date_col, start, frequency, use_original, ...) {
   if (all(is.na(original[[var]]))) {
     SA[[var]] <- NA
   } else {
@@ -18,7 +20,7 @@ adjust_single_series <- function(SA, original, var, date_col, start, frequency, 
 
       # Get only the needed series (and rename them)
       adjusted <- adjusted[, c("date", "final")]
-      adjusted <- dplyr::rename_(adjusted, .dots = stats::setNames(c("date", "final"), c(date_col, var)))
+      adjusted <- dplyr::rename(adjusted, {{ date_col }} := .data[["date"]], {{ var }} := .data[["final"]])
 
       # Merge in
       SA <- dplyr::left_join(SA, adjusted, by = date_col)
