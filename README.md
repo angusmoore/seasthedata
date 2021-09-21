@@ -1,10 +1,11 @@
+# seasthedata
+
  <!-- badges: start -->
  [![CI](https://github.com/angusmoore/seasthedata/actions/workflows/CI.yml/badge.svg)](https://github.com/angusmoore/seasthedata/actions/workflows/CI.yml)
 [![codecov](https://codecov.io/gh/angusmoore/seasthedata/branch/main/graph/badge.svg?token=KGtvZcW48b)](https://codecov.io/gh/angusmoore/seasthedata)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-# seasthedata
 `seasthedata` is an `R` package that makes it easy to seasonally adjust tidy data using X13. It is a thin wrapper around the `seasonal` library (see [github](https://github.com/christophsax/seasonal); [cran](https://cran.r-project.org/package=seasonal)).
 
 The benefit of `seasthedata` is that it accepts `tibbles` or `data.frames` with date columns (instead of `ts`) and respects grouping variables. This means you can easily seasonally adjust a large number of series that are in long form.
@@ -52,4 +53,4 @@ seasthedata(grouped_data)
 
 # Package documentation
 
-Documentation for this package can be found [here](https://angusmoore.github.io/seasthedata/seasthedata.pdf).
+Documentation for this package can be found [here](https://angusmoore.github.io/seasthedata/).
